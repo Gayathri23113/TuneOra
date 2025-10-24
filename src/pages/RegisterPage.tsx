@@ -61,30 +61,7 @@ const RegisterPage: FC = () => {
             <div className="login-box" style={{ height: 'auto', paddingBottom: '20px' }}>
                 
                 {/* STYLIZED ICON AND HEADER */}
-                <div style={{ marginBottom: '20px' }}> 
-                    {/* <div style={{ 
-                        borderRadius: '50%',
-                        width: '70px', 
-                        height: '70px',
-                        margin: '0 auto 15px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(156,39,176,0.5) 100%)', 
-                        boxShadow: '0 0 15px rgba(156, 39, 176, 0.7)',
-                        border: '1px solid rgba(255, 255, 255, 0.4)'
-                    }}>
-                        <MdMusicNote 
-                            style={{ 
-                                fontSize: '45px', 
-                                color: 'white',
-                                textShadow: '0 0 5px rgba(255,255,255,0.8)', 
-                                position: 'relative', 
-                                bottom: '1px'
-                            }} 
-                        />
-                    </div> */}
-                    
+                <div style={{ marginBottom: '20px' }}>                     
                     <h1 style={{ color: '#f48fb1' }}>Join TuneOra</h1>
                     <p style={{ marginBottom: '0' }}>Start your musical journey</p>
                 </div>
@@ -162,3 +139,4 @@ const RegisterPage: FC = () => {
 };
 
 export default RegisterPage;
+

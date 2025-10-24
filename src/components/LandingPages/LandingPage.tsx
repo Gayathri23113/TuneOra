@@ -22,8 +22,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
         <source src={CONCERT_VIDEO_PATH} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-
-      {/* 2. Dark Overlay for Contrast */}
+      
       <div className="overlay"></div>
 
       {/* 3. Animated Visualizer */}
