@@ -1,0 +1,65 @@
+/* src/components/Visualizer/Visualizer.css */
+
+/* Define the animation for the pulsating glow */
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+        border-width: 5px;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+        border-width: 8px;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+        border-width: 5px;
+    }
+}
+
+.visualizer-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; /* Set the size of the visualizer area */
+    height: 600px;
+    z-index: 5; /* Below the content box, above the overlay */
+    pointer-events: none; /* Allows clicks to pass through to the underlying content */
+}
+
+.visualizer-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%; /* Creates the circular shape */
+    border-style: solid;
+    border-color: rgba(224, 176, 255, 0.8); /* Light purple glow */
+    box-shadow: 
+        0 0 15px rgba(224, 176, 255, 0.8),
+        0 0 30px rgba(187, 0, 255, 0.6);
+    
+    animation: pulse 3s infinite alternate ease-in-out;
+}
+
+.wave-1 {
+    width: 80%;
+    height: 80%;
+    border-width: 6px;
+}
+
+.wave-2 {
+    width: 70%;
+    height: 70%;
+    border-width: 4px;
+    animation-delay: -1.5s; /* Staggers the pulse animation for a more dynamic look */
+    opacity: 0.6;
+}
+
+.visualizer-waveform {
+    /* If you had a horizontal line visualizer like in the video, 
+       you would style it here, typically as an SVG or a set of animated DIV bars. */
+}

@@ -1,0 +1,226 @@
+/* src/styles.css */
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* BACKGROUND IMAGE LINE REMOVED! It will be set via inline style in LoginPage.js */
+    background-size: cover;
+    background-position: center;
+    background-color: #1a1a2e; /* Fallback */
+    position: relative;
+}
+
+/* Glass-morphism Overlay */
+.login-box {
+    padding: 40px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    color: white;
+    text-align: center;
+    width: 350px;
+}
+
+.login-box h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 1em;
+    outline: none;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #9c27b0;
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signup-text {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.signup-link {
+    color: #f48fb1;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* WARNING: If your styles.css already exists, only update the .login-box */
+/* ---------------------------------------------------------------------- */
+
+/* Container: Full screen background */
+.login-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(5px);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Form Box: Increased width and glass effect */
+.login-box {
+    /* 💡 INCREASED WIDTH HERE */
+    max-width: 450px; 
+    width: 90%; /* Ensure responsiveness on small screens */
+    
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px); /* Stronger glass effect */
+    border-radius: 20px;
+    padding: 30px 40px;
+    color: #fff;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Header Text */
+.login-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    color: #f48fb1;
+}
+
+.login-box p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    color: #ccc;
+}
+
+.login-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Form Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-group input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 2px #9c27b0; /* Purple ring on focus */
+}
+
+/* Button Styling */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #9c27b0, #7b1fa2); /* Purple gradient */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background: linear-gradient(45deg, #af52c4, #8e47a9);
+    transform: translateY(-1px);
+}
+
+/* Signup Link */
+.signup-text {
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.signup-link {
+    color: #f48fb1; /* Pink color for link */
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+    transition: color 0.2s;
+}
+
+.signup-link:hover {
+    color: #fff;
+}
+
+/* Custom Message Box (for alerts) */
+.message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #4a148c; /* Dark purple */
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    min-width: 250px;
+}
+
+.message-box button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: #f48fb1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+}

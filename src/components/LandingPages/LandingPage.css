@@ -1,0 +1,119 @@
+
+/* --- Container and Background --- */
+.landing-container {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevents scrollbars from video/content overflow */
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the entire screen */
+    z-index: 1;
+}
+
+/* Dark Overlay for better text readability */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45); /* Increased darkness for contrast */
+    z-index: 2;
+}
+
+/* --- Content Box --- */
+.content-box {
+    z-index: 10; /* Bring content above video and overlay */
+    text-align: center;
+    color: white;
+    padding: 40px;
+    /*background: rgba(10, 0, 20, 0.6);  Slightly darker, slightly transparent box for structure */
+    /*
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Modern frosted glass effect */
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); */
+    max-width: 90%;
+    width: 400px; /* Set a fixed max-width for the content */
+}
+
+.logo-title {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    /* Neon/Glow Effect (matching the video's purple) */
+    text-shadow: 0 0 10px #e0b0ff, 0 0 20px #e0b0ff; 
+}
+
+.welcome-message {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #ddd;
+}
+
+/* --- Buttons --- */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.primary-btn {
+    background-color: #bb00ff; /* Bright purple primary color */
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(187, 0, 255, 0.5);
+}
+
+.primary-btn:hover {
+    background-color: #d147ff;
+    transform: translateY(-2px);
+}
+
+/* --- Secondary Actions (Login/Signup) --- */
+.secondary-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.secondary-btn {
+    background: none;
+    color: #ccc;
+    padding: 5px 10px;
+    font-weight: 400;
+}
+
+.secondary-btn:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.separator {
+    color: #666;
+    margin: 0 10px;
+    font-size: 1rem;
+}
+
+/* Basic Reset for the page */
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
