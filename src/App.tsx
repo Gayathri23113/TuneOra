@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import LandingPage from "./components/LandingPages/LandingPage";
 import TuneOra from "./pages/TuneOra";
 import LoginPage from "./pages/LoginPage";
@@ -20,23 +21,23 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <Routes>
-          <Route 
-            path="/" 
-            element={
-              <LandingPage onGetStartedClick={handleGetStartedClick} />
-            } 
-          />
-          
-          <Route path="/LoginPage" element={<LoginPage />} />
-          <Route path="/RegisterPage" element={<RegisterPage />} />
-          <Route path="/TuneOra" element={<TuneOra />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route
+              path="/"
+              element={<LandingPage onGetStartedClick={handleGetStartedClick} />}
+            />
+
+            <Route path="/LoginPage" element={<LoginPage />} />
+            <Route path="/RegisterPage" element={<RegisterPage />} />
+            <Route path="/TuneOra" element={<TuneOra />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };

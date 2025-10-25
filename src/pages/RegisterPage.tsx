@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css'; 
 import BackgroundImage from '../assets/bgimg.jpg'; 
 // import { MdMusicNote } from 'react-icons/md';
+import { registerUser } from '../firebase';
+import { auth as firebaseAuth } from '../firebase';
 
 // Custom Message Component to replace alert()
 interface MessageModalProps {
@@ -25,6 +27,9 @@ const RegisterPage: FC = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const firebaseAvailable = !!firebaseAuth;
 
     const handleRegister = (e: FormEvent) => {
         e.preventDefault();
@@ -35,17 +40,32 @@ const RegisterPage: FC = () => {
         }
 
         console.log('Attempting registration with:', { username, email, password });
-        
-        // --- 3. Navigation after successful registration ---
-        // Use the custom message box instead of alert()
-        setMessage("Registration successful! Please sign in.");
+        setMessage(null);
+        setIsLoading(true);
+
+        if (!firebaseAvailable) {
+            setMessage('Firebase is not configured. Please add your Firebase config to .env.local and restart the dev server.');
+            setIsLoading(false);
+            return;
+        }
+
+        // Perform Firebase registration
+        registerUser({ email, password, fullName: username })
+            .then(() => {
+                setMessage('Registration successful! Please sign in.');
+            })
+            .catch((err) => {
+                console.error('Registration error', err);
+                setMessage((err as Error).message || 'Registration failed.');
+            })
+            .finally(() => setIsLoading(false));
     };
 
     const handleCloseMessage = () => {
         setMessage(null);
-        // 💡 UPDATED NAVIGATION: Navigate to the login page (root path) after closing the success message
+            // 💡 UPDATED NAVIGATION: Navigate to the login page (root path) after closing the success message
         if (message === "Registration successful! Please sign in.") {
-             navigate('/');
+            navigate('/LoginPage');
         }
     }
 
@@ -119,8 +139,8 @@ const RegisterPage: FC = () => {
                         />
                     </div>
 
-                    <button type="submit" className="login-button">
-                        Register
+                    <button type="submit" className="login-button" disabled={isLoading}>
+                        {isLoading ? 'Registering...' : 'Register'}
                     </button>
                 </form>
 

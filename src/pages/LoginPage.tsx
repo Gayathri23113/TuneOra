@@ -2,6 +2,8 @@ import React, { useState, FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css'; 
 import BackgroundImage from '../assets/bgimg.jpg'; 
+import { useAuth } from '../contexts/AuthContext';
+import { auth as firebaseAuth } from '../firebase';
 // import { MdMusicNote } from 'react-icons/md';
 
 const LoginPage: FC = () => {
@@ -9,12 +11,25 @@ const LoginPage: FC = () => {
   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = (e: FormEvent) => {
+    const { signIn } = useAuth();
+    const firebaseAvailable = !!firebaseAuth;
+
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
-        
-        console.log('Logging in...');
-        navigate('/TuneOra'); 
+        setError(null);
+        setIsLoading(true);
+        try {
+            await signIn(email, password);
+            navigate('/TuneOra');
+        } catch (err) {
+            console.error('Login failed', err);
+            setError((err as Error).message || 'Login failed.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleSignup = () => {
@@ -82,9 +97,15 @@ const LoginPage: FC = () => {
                     </div>
 
                     {/* Login Button */}
-                    <button type="submit" className="login-button">
-                        Login
+                    <button type="submit" className="login-button" disabled={isLoading || !firebaseAvailable}>
+                        {isLoading ? 'Signing in...' : 'Login'}
                     </button>
+                    {error && <div style={{ color: 'salmon', marginTop: 8 }}>{error}</div>}
+                    {!firebaseAvailable && (
+                        <div style={{ color: 'orange', marginTop: 8 }}>
+                            Firebase is not configured. Add your config to <code>.env.local</code> (see README) and restart the dev server.
+                        </div>
+                    )}
                 </form>
 
                 {/* Signup Link with Navigation */}
