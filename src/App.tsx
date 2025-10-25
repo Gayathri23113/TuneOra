@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPages/LandingPage";
 import TuneOra from "./pages/TuneOra";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => {
 
             <Route path="/LoginPage" element={<LoginPage />} />
             <Route path="/RegisterPage" element={<RegisterPage />} />
+            <Route path="/Profile" element={<ProfilePage />} />
             <Route path="/TuneOra" element={<TuneOra />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

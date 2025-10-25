@@ -1,7 +1,8 @@
-import { Home, Shuffle, Music, Globe, LogIn, LogOut, Search, ListMusic, ChevronDown } from 'lucide-react';
+import { Home, Shuffle, Music, Globe, LogIn, LogOut, Search, ListMusic, ChevronDown, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 interface SidebarProps {
@@ -22,7 +23,9 @@ const LANGUAGE_OPTIONS = [
 
 export const Sidebar = ({ currentView, onViewChange }: SidebarProps) => {
   const { language, setLanguage, t } = useLanguage();
-  const { isLoggedIn, login, logout } = useAuth();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const isLoggedIn = !!user;
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
 
   const selectedLanguage = LANGUAGE_OPTIONS.find(lang => lang.code === language) || LANGUAGE_OPTIONS[0];
@@ -143,8 +146,22 @@ export const Sidebar = ({ currentView, onViewChange }: SidebarProps) => {
           </Button>
         </nav>
 
-        {/* Enhanced Bottom Section - Language moved up */}
-        <div className="p-4 space-y-10 border-t border-[#FFE4C4]/20 mt-auto">
+        {/* Enhanced Bottom Section - Profile + Language */}
+        <div className="p-4 space-y-8 border-t border-[#FFE4C4]/20 mt-auto">
+          {/* My Profile button (above language) */}
+          {isLoggedIn && (
+            <div>
+              <Button
+                variant="ghost"
+                className="w-full justify-start h-11 text-base text-gray-300 hover:text-white hover:bg-white/5 border border-transparent hover:border-[#FFE4C4]/20"
+                onClick={() => navigate('/Profile')}
+              >
+                <User className="mr-3 h-4 w-4" />
+                  {(t as any).myProfile || 'My Profile'}
+              </Button>
+            </div>
+          )}
+
           {/* Language Dropdown with bisque glow */}
           <div className="relative">
             <div className="p-3 bg-white/5 hover:bg-[#FFE4C4]/10 rounded-lg transition-all duration-300 border border-white/5 hover:border-[#FFE4C4]/30 hover:shadow-[0_0_15px_rgba(255,228,196,0.1)]">
@@ -206,7 +223,14 @@ export const Sidebar = ({ currentView, onViewChange }: SidebarProps) => {
           <Button
             variant="outline"
             className="w-full h-11 border-white/10 hover:border-[#FFE4C4]/50 hover:bg-[#FFE4C4]/10 transition-all text-gray-400 hover:text-white hover:shadow-[0_0_15px_rgba(255,228,196,0.15)]"
-            onClick={isLoggedIn ? logout : login}
+            onClick={() => {
+              if (isLoggedIn) {
+                signOut();
+                navigate('/');
+              } else {
+                navigate('/LoginPage');
+              }
+            }}
           >
             {isLoggedIn ? (
               <>

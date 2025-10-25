@@ -55,7 +55,7 @@ export const Dashboard = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error loading songs:', error);
-        toast.error('Failed to load songs. Please check the songs directory.');
+        // toast.error('Failed to load songs. Please check the songs directory.');
         setLoading(false);
       }
     };
