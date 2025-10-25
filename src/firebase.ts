@@ -16,6 +16,11 @@ import {
     serverTimestamp,
     getDoc,
 } from 'firebase/firestore';
+// Optional: bcryptjs used only if you opt-in to storing password hashes.
+// Storing passwords (even hashed) in Firestore is generally unnecessary and risky.
+// Prefer using Firebase Authentication; this feature is provided only as an
+// opt-in helper for legacy migration scenarios.
+import bcrypt from 'bcryptjs';
 
 // Build firebaseConfig from common Vite env vars or fall back to a global if present
 // This keeps the module safe to import even when the environment isn't set up.
@@ -100,12 +105,34 @@ export const registerUser = async ({ email, password, fullName }: RegisterParams
 
     const uid = cred.user.uid;
     const userRef = doc(firestore, 'users', uid);
-    await setDoc(userRef, {
+
+    // By default we do NOT store the password. If you explicitly opt-in by
+    // setting VITE_STORE_PASSWORD_HASH=true in your .env.local, we will store
+    // a bcrypt hash of the password (not the plaintext). This is still less
+    // secure than relying on Firebase Auth alone — prefer not to enable it.
+    const storePasswordHash = (import.meta as any).env?.VITE_STORE_PASSWORD_HASH === 'true';
+    let passwordHash: string | null = null;
+    if (storePasswordHash) {
+        try {
+            // bcrypt.hash is synchronous in bcryptjs but returns a string; use 10 rounds.
+            passwordHash = await bcrypt.hash(password, 10);
+        } catch (err) {
+            console.warn('Failed to hash password for storage', err);
+            passwordHash = null;
+        }
+    }
+
+    const docData: Record<string, any> = {
         uid,
         email,
         fullName: fullName || null,
         createdAt: serverTimestamp(),
-    });
+    };
+    if (passwordHash) {
+        docData.passwordHash = passwordHash;
+    }
+
+    await setDoc(userRef, docData);
 
     return cred.user;
 };
