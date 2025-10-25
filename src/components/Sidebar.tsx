@@ -65,7 +65,7 @@ export const Sidebar = ({ currentView, onViewChange }: SidebarProps) => {
           </div>
 
           {/* Enhanced User Welcome Card with bisque styling */}
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <div className="mb-6 p-4 bg-gradient-to-br from-[#FFE4C4]/15 to-[#FFE4C4]/5 border border-[#FFE4C4]/30 rounded-xl backdrop-blur-sm shadow-[0_0_20px_rgba(255,228,196,0.15)]">
               <p className="text-sm font-medium text-white/90">
                 {t.welcome}, <span 
@@ -76,7 +76,7 @@ export const Sidebar = ({ currentView, onViewChange }: SidebarProps) => {
                 </span>!
               </p>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Navigation with bisque hover effects */}
